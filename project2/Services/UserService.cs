@@ -17,22 +17,17 @@ namespace project2.Services
             int result=0;
             try
             {
-                
-                
-                
-                    var userInstall = DB.Users.Where(x => x.DateRegistration <= DateTime.Now.AddDays(7)).Count();
+                    var userInstall = DB.Users.Where(x => x.DateRegistration <= DateTime.Now.AddDays(-7)).Count();
                     var usersDateRegistr = DB.Users.Where(x => (DateTime.Now - x.DateLastVisit).Days >= 7).Count();
                     int userVisit = Convert.ToInt32(userInstall);
                     int userRegist = Convert.ToInt32(usersDateRegistr);
                     result = (userVisit / userRegist) * (userVisit / userRegist);
                     string rresult= result.ToString();
                     return rresult;
-                
-                
             }
             catch (DivideByZeroException)
             {
-                string err = "Нет пользователей!(возможно нужно добавить больше поьзователей)";
+                string err = "Условие для RollingRetention 7 day не выполнено!(возможно нужно добавить больше пользователей)";
                 return err;
             }
             

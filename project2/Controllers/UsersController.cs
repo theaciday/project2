@@ -35,7 +35,7 @@ namespace Project2.Controllers
             return userServicec.GetLiveSpan();
         }
         [HttpGet]
-        [Route("getrollingret2")]
+        [Route("getrollingrett")]
         public ActionResult<string> GetRollning2()
         {
               return  userServicec.RollingUser7();

@@ -24,7 +24,7 @@ namespace Project2
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddTransient<UserService>();
+            services.AddTransient<IUserService,UserService>();
             services.AddControllersWithViews().AddJsonOptions(opts => opts.JsonSerializerOptions.PropertyNamingPolicy = null);
             services.AddEntityFrameworkNpgsql().AddDbContext<ContextDB>(opt=>opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<ContextDB>(options =>

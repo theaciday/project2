@@ -4,15 +4,21 @@ import { Chart, registerables } from "chart.js";
 Chart.register(...registerables);
 
 const CalculateButton = () => {
-    const [lifespans, setLifespans] = useState(null);
+    const [lifespans, setLifespans,rolling,setRolling] = useState(null);
 
     const chart = useRef();
 
+    const onRolling = () => {
+        fetch("/api/users/")
+
+    };
+
+
     const onCalculate = () => {
-        fetch("/api/api/getrollingret/")
+        fetch("/api/users/getrollingret/")
            .then((response) => response.json())
            .then((data) => {
-             setLifespans(data);
+               setLifespans(data.map(item => item.Days));
            })
            .catch((error) => {
              console.error(error);
@@ -32,7 +38,7 @@ const CalculateButton = () => {
                 labels: lifespans.map((value, index) => index + 1),
                 datasets: [
                     {
-                        label: "Продолжительность жизни",
+                        label: "Продолжительность жизни ",
                         data: lifespans,
                         backgroundColor: [
                             "rgba(255, 99, 132, 0.2)",
@@ -75,5 +81,4 @@ const CalculateButton = () => {
         </>
     );
 };
-
 export default CalculateButton;

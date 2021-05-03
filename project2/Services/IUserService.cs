@@ -7,7 +7,7 @@ namespace project2.Services
 {
     public interface IUserService
     {
-        int[] RollingUser7();
+        string RollingUser7();
         TimeSpan[] GetLiveSpan();
     }
 }

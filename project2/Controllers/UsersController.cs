@@ -14,11 +14,12 @@ namespace Project2.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService userService;
+        private readonly IUserService userServicec;
         private readonly ContextDB contextDB;
-        public UsersController(ContextDB contextDB)
+        public UsersController(ContextDB contextDB, IUserService userService)
         {
-            this.contextDB = contextDB;       
+            this.contextDB = contextDB;
+            userServicec = userService;
         }
 
         [HttpGet]
@@ -28,11 +29,16 @@ namespace Project2.Controllers
         }
 
         [HttpGet]
-        [Route("api/getrollingret")]
-        public ActionResult<IEnumerable<TimeSpan>> GetRollingRet() 
+        [Route("getrollingret")]
+        public ActionResult<IEnumerable<TimeSpan>> GetRollingRet()
         {
-            userService.RollingUser7();
-            return userService.GetLiveSpan();
+            return userServicec.GetLiveSpan();
+        }
+        [HttpGet]
+        [Route("getrollingret2")]
+        public ActionResult<string> GetRollning2()
+        {
+              return  userServicec.RollingUser7();
         }
 
         // POST api/<UsersController>
@@ -41,21 +47,11 @@ namespace Project2.Controllers
         {
             contextDB.Users.Add(user);
             contextDB.SaveChanges();
-            
             return Ok(user);
-
         }
 
-        // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+       
 
-        // DELETE api/<UsersController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+     
     }
 }

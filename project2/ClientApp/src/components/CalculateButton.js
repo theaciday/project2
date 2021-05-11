@@ -5,9 +5,9 @@ Chart.register(...registerables);
 
 const CalculateButton = () => {
     const [lifespans, setLifespans] = useState(null);
-    // НОВЫЙ КОД НАЧАЛО
+    
     const [rollingRetention, setRollingRetention] = useState(null);
-    // НОВЫЙ КОД КОНЕЦ
+   
 
     const chart = useRef();
 
@@ -21,7 +21,6 @@ const CalculateButton = () => {
                 console.error(error);
             });
 
-        // НОВЫЙ КОД НАЧАЛО
         fetch("/api/users/getrollingrett/")
             .then((response) => response.json())
             .then((data) => {
@@ -30,7 +29,7 @@ const CalculateButton = () => {
             .catch((error) => {
                 console.error(error);
             });
-        // НОВЫЙ КОД КОНЕЦ
+
     };
 
     useEffect(() => {
@@ -84,12 +83,9 @@ const CalculateButton = () => {
                 <button onClick={onCalculate}>Calculate</button>
             </div>
 
-            {/* НОВЫЙ КОД НАЧАЛО */}
             {rollingRetention !== null && (
-                <div>Rolling retention {rollingRetention}</div>
+                <div>Rolling retention 7day {rollingRetention}</div>
             )}
-            {/* НОВЫЙ КОД КОНЕЦ */}
-
             <div style={{ maxHeight: "400px", maxWidth: "400px" }}>
                 <canvas id="myChart" width="400" height="400"></canvas>
             </div>
